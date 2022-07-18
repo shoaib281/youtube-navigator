@@ -1,0 +1,20 @@
+{
+	"name": "axample",
+	"description": "asdf",
+	"version": "1.0",
+	"manifest_version": 3,
+	"permissions": ["storage"],
+	"background": {
+		"service_worker":"background.js"
+	},
+
+	"content_scripts": [
+		{
+			"js": ["search.js"],
+			"matches": ["*://www.youtube.com/*"]
+		}
+	],
+	"permissions": [
+		"tabs"
+	]
+}
