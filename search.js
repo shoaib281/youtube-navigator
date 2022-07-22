@@ -83,6 +83,7 @@ class search {
 		this.previousHighlighted = false;
 		this.bg = "LightGray";
 
+
 		this.waitForElm('ytd-item-section-renderer').then((elm) => {
 			let it = elm.children;
 			for (let item in it) {
@@ -90,10 +91,15 @@ class search {
 				if (it[item].id == "contents"){
 
 					this.element = it[item];
+					this.getAllVideos();
 					break;
 				}
 			}
 		});
+	}
+
+	getAllVideos() {
+		this.videos = document.querySelectorAll("ytd-video-renderer, ytd-channel-renderer");
 	}
 		
 	waitForElm(selector) {
@@ -120,16 +126,16 @@ class search {
 	}
 	focus(){
 		if (this.previousHighlighted) {this.previousHighlighted.removeAttribute("style");}
-		this.previousHighlighted = this.element.children[this.count]
+		this.previousHighlighted = this.videos[this.count]
 		this.previousHighlighted.style.backgroundColor = this.bg;
+
+
 		if (this.previousHighlighted.getBoundingClientRect().top < 0) {
 			this.previousHighlighted.scrollIntoView();
-
 			window.scrollBy(0,-70);
 		}
 		else if (this.previousHighlighted.getBoundingClientRect().bottom > window.innerHeight) {
 			this.previousHighlighted.scrollIntoView({block: "end"});
-
 			window.scrollBy(0, 10);
 		}
 	}
@@ -150,8 +156,9 @@ class search {
 	}
 
 	keypress(key){
+		this.getAllVideos();
 		if (key == "j"){
-			if (this.count - 1 < this.element.children.length) {
+			if (this.count - 1 < this.videos.length) {
 				this.count ++;
 				this.focus();
 			}
@@ -163,7 +170,7 @@ class search {
 				}
 			}
 		else if (key == "enter"){
-			let target = this.element.children[this.count];
+			let target = this.videos[this.count];
 			if (target) {
 				let link = target.querySelector("#main-link") ||  target.querySelector("#video-title");
 				openLink(link);
