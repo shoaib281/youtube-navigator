@@ -253,36 +253,40 @@ function updateMode(){
 //keyboard input
 
 document.addEventListener('keydown', function(event) {
-    if(event.keyCode == 74) {
-	    mode.keypress("j");
-    }
-    else if(event.keyCode == 75) {
-	mode.keypress("k");
-    }
-    else if (event.keyCode == 72){
-	    mode.keypress("h");
-    }
-    else if (event.keyCode == 67){
-	    mode.keypress("c");
-    }
-    else if (event.keyCode == 65) {
-	    mode.keypress("a");
-    }
-    else if (event.keyCode == 77) {
-	    mode.keypress("m");
-    }
-    else if (event.keyCode == 80) {
-	    mode.keypress("p");
-    }
-    else if (event.keyCode == 86) {
-	    mode.keypress("v");
-    }
-    else if(event.keyCode == 13) {
-	    mode.keypress("enter");
-    }
-    else if(event.keyCode == 17) {
-	    isCtrlDown = true;
-    }
+	activeElement = document.activeElement
+	
+	if (! (activeElement.id == "search")) { 
+		if(event.keyCode == 74) {
+			mode.keypress("j");
+		}
+		else if(event.keyCode == 75) {
+			mode.keypress("k");
+		}
+		else if (event.keyCode == 72){
+			mode.keypress("h");
+		}
+		else if (event.keyCode == 67){
+			mode.keypress("c");
+		}
+		else if (event.keyCode == 65) {
+			mode.keypress("a");
+		}
+		else if (event.keyCode == 77) {
+			mode.keypress("m");
+		}
+		else if (event.keyCode == 80) {
+			mode.keypress("p");
+		}
+		else if (event.keyCode == 86) {
+			mode.keypress("v");
+		}
+		else if(event.keyCode == 13) {
+			mode.keypress("enter");
+		}
+		else if(event.keyCode == 17) {
+			isCtrlDown = true;
+		}
+	}
 });
 
 document.addEventListener('keyup', function (event) {

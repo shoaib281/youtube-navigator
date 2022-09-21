@@ -1,6 +1,6 @@
 {
-	"name": "axample",
-	"description": "asdf",
+	"name": "ayoutube",
+	"description": "ayoutube",
 	"version": "1.0",
 	"manifest_version": 3,
 	"permissions": ["storage"],
