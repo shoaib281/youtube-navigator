@@ -99,7 +99,14 @@ class search {
 	}
 
 	getAllVideos() {
-		this.videos = document.querySelectorAll("ytd-video-renderer, ytd-channel-renderer");
+		let videos = document.querySelectorAll("ytd-video-renderer, ytd-channel-renderer");
+		this.videos = [];
+
+		for (var i = 0; i < videos.length ; i++ ){
+			if (videos[i].offsetHeight != 0) {
+				this.videos.push(videos[i])	
+			}
+		}	
 	}
 		
 	waitForElm(selector) {
