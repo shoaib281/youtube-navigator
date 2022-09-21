@@ -1,5 +1,6 @@
 let isCtrlDown = false;
 let path = window.location.pathname.split('/')[1];
+let basePath = "https://youtube.com/"
 let mode = false;
 
 
@@ -168,14 +169,18 @@ class search {
 			if (this.count - 1 < this.videos.length) {
 				this.count ++;
 				this.focus();
+			} else {
+				window.scrollTo(0, document.documentElement.scrollHeight);
 			}
 		}
 		else if (key == "k"){
 			if (this.count > 0) {
 				this.count --;
 				this.focus();
-				}
+			} else {
+				window.scrollTo(0, 0);
 			}
+		}
 		else if (key == "enter"){
 			let target = this.videos[this.count];
 			if (target) {
@@ -189,8 +194,8 @@ class search {
 class video {
 	constructor(){
 		this.link = false;	
-		this.waitForElm('.yt-simple-endpoint.style-scope.ytd-video-owner-renderer').then((elm) => {
-			this.link = elm.href;
+		this.waitForElm('meta[itemprop=channelId]').then((elm) => {
+			this.link = basePath + "channel/" + elm.content;
 		});
 	}
 		
@@ -198,7 +203,7 @@ class video {
 	    return new Promise(resolve => {
 		let elm = document.querySelector(selector);
 		if (elm) {
-		    if (elm.href) { 
+		    if (elm.content) { 
 		    	return resolve(elm);
 		    }
 		}
@@ -206,7 +211,7 @@ class video {
 		const observer = new MutationObserver(mutations => {
 			let elm = document.querySelector(selector);
 		    if (elm) {
-			    if (elm.href) {
+			    if (elm.content) {
 				resolve(elm);
 				observer.disconnect();
 			    }
